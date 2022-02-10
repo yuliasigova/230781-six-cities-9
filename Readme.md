@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [yulya sigova](https://up.htmlacademy.ru/react/9/user/230781).
-* Наставник: `Неизвестно`.
+* Наставник: [Игорь Казанцев](https://htmlacademy.ru/profile/id572311).
 
 ---
 
