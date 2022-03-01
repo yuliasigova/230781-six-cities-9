@@ -1,11 +1,14 @@
 import CardOffer from '../card-offer/card-offer';
 import Header from '../header/header';
+import {Offers} from '../../types/offers';
 
 type  MainScreenProps = {
   offerCount: number;
+  offers: Offers;
 }
 
-function MainScreen ({offerCount}: MainScreenProps) {
+function MainScreen ({offerCount, offers}: MainScreenProps):JSX.Element {
+  const listOffer = offers.map((offer) => <CardOffer key = {offer.id} offer = {offer}/>);
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -68,11 +71,7 @@ function MainScreen ({offerCount}: MainScreenProps) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CardOffer/>
-                <CardOffer/>
-                <CardOffer/>
-                <CardOffer/>
-                <CardOffer/>
+                {listOffer}
               </div>
             </section>
             <div className="cities__right-section">
