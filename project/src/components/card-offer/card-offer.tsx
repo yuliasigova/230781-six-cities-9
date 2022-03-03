@@ -1,21 +1,20 @@
 import { Offer } from '../../types/offers';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
-
+import {createPremiumMark} from '../../const';
 type  CardOfferProps = {
   offer: Offer;
 }
 
 function CardOffer ({offer}:CardOfferProps ):JSX.Element {
   const {previewImage, isPremium, price, type, title, id} = offer;
-  const [offerId, setOfferId] = useState(id);
-  const createPremiumMark = () => isPremium ? <div className="place-card__mark"><span>Premium</span></div> : '';
+  const [offerId, setOfferId] = useState<number>(id);
   return (
     <article
       onMouseOver={() => {setOfferId(offerId);}}
       className="cities__place-card place-card"
     >
-      {createPremiumMark()}
+      {createPremiumMark(isPremium)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="/">
           <img className="place-card__image" src={previewImage} width="{260}" height="{200}" alt="offer place" />

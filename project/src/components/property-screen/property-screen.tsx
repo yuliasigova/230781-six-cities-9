@@ -1,6 +1,5 @@
 import Header from '../header/header';
 import RewiewForm from '../review-form/review-form';
-//import CardOffer from '../card-offer/card-offer';
 
 function PropertyScreen ():JSX.Element {
   return (
@@ -161,9 +160,6 @@ function PropertyScreen ():JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {/* <CardOffer />
-              <CardOffer />
-              <CardOffer /> */}
             </div>
           </section>
         </div>

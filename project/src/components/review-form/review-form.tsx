@@ -1,8 +1,8 @@
 import {useState, ChangeEvent} from 'react';
 
 function RewiewForm ():JSX.Element {
-  const [rating, setRating] = useState('0');
-  const [textComment, setTextComment] = useState('');
+  const [rating, setRating] = useState<string | null>('0');
+  const [textComment, setTextComment] = useState<string>('');
 
   const inputChangeHandle = (evt:ChangeEvent<HTMLInputElement>) => {
     setRating(evt.target.value);
