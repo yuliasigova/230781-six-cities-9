@@ -1,6 +1,8 @@
-import CardOffer from '../card-offer/card-offer';
 import Header from '../header/header';
 import {Offers} from '../../types/offers';
+import Map from '../map/map';
+import OffersList from '../offers-list/offers-list';
+import {useState} from 'react';
 
 type  MainScreenProps = {
   offerCount: number;
@@ -8,7 +10,9 @@ type  MainScreenProps = {
 }
 
 function MainScreen ({offerCount, offers}: MainScreenProps):JSX.Element {
-  const listOffer = offers.map((offer) => <CardOffer key = {offer.id} offer = {offer}/>);
+  const [selectedOffer, setSelectedOffer] = useState<number|null>(null);
+  const onListItemHover = (offerId: number | null) => setSelectedOffer(offerId);
+
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -70,12 +74,10 @@ function MainScreen ({offerCount, offers}: MainScreenProps):JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {listOffer}
-              </div>
+              <OffersList onActiveCardHover = {onListItemHover} offers = {offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map city = {offers[0].city} offers={offers} selectedOffer= {selectedOffer}/>
             </div>
           </div>
         </div>

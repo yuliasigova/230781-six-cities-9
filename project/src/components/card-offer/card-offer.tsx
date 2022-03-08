@@ -1,17 +1,17 @@
 import { Offer } from '../../types/offers';
-import {useState} from 'react';
+
 import {Link} from 'react-router-dom';
 import {createPremiumMark} from '../../const';
 type  CardOfferProps = {
   offer: Offer;
+  onCardHover: (id:number | null) => void;
 }
 
-function CardOffer ({offer}:CardOfferProps ):JSX.Element {
+function CardOffer ({offer, onCardHover}:CardOfferProps ):JSX.Element {
   const {previewImage, isPremium, price, type, title, id} = offer;
-  const [offerId, setOfferId] = useState<number>(id);
   return (
     <article
-      onMouseOver={() => {setOfferId(offerId);}}
+      onMouseOver={() => {onCardHover(id);}}
       className="cities__place-card place-card"
     >
       {createPremiumMark(isPremium)}
@@ -40,7 +40,7 @@ function CardOffer ({offer}:CardOfferProps ):JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offerId}`}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
