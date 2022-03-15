@@ -4,15 +4,15 @@ import {City} from '../types/offers';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City):Map | null {
   const [map, setMap] = useState<Map | null>(null);
-
+  const {latitude, longitude, zoom} = city.location;
   useEffect(() => {
-    if (mapRef.current !== null && map === null) {
+    if (mapRef.current !== null && map === null ) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.location.latitude,
-          lng: city.location.longitude,
+          lat: latitude,
+          lng: longitude,
         },
-        zoom: 11,
+        zoom: zoom,
       });
 
       const layer = new TileLayer(
@@ -27,9 +27,11 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City):Map | 
 
       setMap(instance);
     }
-  }, [mapRef, map, city]);
+    map?.setView({lat: latitude, lng: longitude}, zoom);
 
-  return map;
+  }, [mapRef, map, city, latitude, longitude, zoom]);
+
+  return map ;
 }
 
 export default useMap;

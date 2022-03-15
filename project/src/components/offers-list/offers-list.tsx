@@ -12,7 +12,7 @@ function OffersList ({offers, onActiveCardHover}:OffersListProps):JSX.Element {
     <div className="cities__places-list places__list tabs__content">
       {
         offers.map((offer) => <CardOffer onCardHover = {handleCardActive} key = {offer.id} offer = {offer}/>)
-      };
+      }
     </div>
   );
 }
