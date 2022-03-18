@@ -1,12 +1,9 @@
 import Header from '../header/header';
-import {Offers} from '../../types/offers';
 import FavoriteCard from '../favorite-card/favorite-card';
+import {useAppSelector } from '../../hooks/index';
 
-type FavoritesScreenProps = {
-  offers: Offers;
-}
-
-function FavoritesScreen ({offers}:FavoritesScreenProps):JSX.Element {
+function FavoritesScreen ():JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const favoritesList = favoriteOffers.map((offer) => <FavoriteCard key = {offer.id} offer = {offer}/>);
   return (

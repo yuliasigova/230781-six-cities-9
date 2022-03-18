@@ -1,5 +1,5 @@
 import { Offer } from '../../types/offers';
-import {createPremiumMark} from '../../const';
+import {createPremiumMark} from '../../util';
 
 type  FavoriteCardProps = {
   offer: Offer;
