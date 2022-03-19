@@ -6,14 +6,18 @@ import LoginScreen from '../login-screen/login-screen';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import {Offers} from '../../types/offers';
+import {useAppSelector} from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 
+function App(): JSX.Element {
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
-type AppScreenProps = {
-  offers: Offers;
-}
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
-function App({offers}:AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -22,7 +26,7 @@ function App({offers}:AppScreenProps): JSX.Element {
         <Route path = {AppRoute.Favorites}
           element = {
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <FavoritesScreen offers = {offers} />
+              <FavoritesScreen />
             </PrivateRoute>
           }
         />

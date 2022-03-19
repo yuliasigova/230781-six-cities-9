@@ -1,7 +1,7 @@
 import { Offer } from '../../types/offers';
-
 import {Link} from 'react-router-dom';
-import {createPremiumMark} from '../../const';
+import {createPremiumMark} from '../../util';
+
 type  CardOfferProps = {
   offer: Offer;
   onCardHover: (id:number | null) => void;

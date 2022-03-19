@@ -11,6 +11,10 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const createPremiumMark = (isPremium:boolean):JSX.Element | null => isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null;
-
 export const cities:string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export enum APIRoute {
+  Hotels = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
