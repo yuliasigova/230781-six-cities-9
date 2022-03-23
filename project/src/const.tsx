@@ -15,6 +15,14 @@ export const cities:string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Ha
 
 export enum APIRoute {
   Hotels = '/hotels',
+  Comments = '/comments',
+  Favorite = '/favorite',
   Login = '/login',
   Logout = '/logout',
+}
+
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
 }
