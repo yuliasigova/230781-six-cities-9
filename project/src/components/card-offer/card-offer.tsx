@@ -1,6 +1,7 @@
 import { Offer } from '../../types/offers';
 import {Link} from 'react-router-dom';
-import {createPremiumMark} from '../../util';
+import {createPremiumMark, getRating} from '../../util';
+
 
 type  CardOfferProps = {
   offer: Offer;
@@ -8,7 +9,7 @@ type  CardOfferProps = {
 }
 
 function CardOffer ({offer, onCardHover}:CardOfferProps ):JSX.Element {
-  const {previewImage, isPremium, price, type, title, id} = offer;
+  const {previewImage, isPremium, price, type, title, id, rating} = offer;
   return (
     <article
       onMouseOver={() => {onCardHover(id);}}
@@ -35,7 +36,7 @@ function CardOffer ({offer, onCardHover}:CardOfferProps ):JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}> </span>
+            <span style={{width: `${getRating(rating)}%`}}> </span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

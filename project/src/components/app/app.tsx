@@ -3,16 +3,18 @@ import MainScreen from '../main-screen/main-screen';
 import PropertyScreen from '../property-screen/property-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import LoginScreen from '../login-screen/login-screen';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import {useAppSelector} from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
+import {isCheckedAuth} from '../../util';
 
 function App(): JSX.Element {
   const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (!isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <LoadingScreen />
     );
@@ -25,7 +27,7 @@ function App(): JSX.Element {
         <Route path = {AppRoute.Room} element = {<PropertyScreen />} />
         <Route path = {AppRoute.Favorites}
           element = {
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute>
               <FavoritesScreen />
             </PrivateRoute>
           }
