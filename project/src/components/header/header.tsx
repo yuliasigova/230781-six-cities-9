@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 import {logoutAction} from '../../store/api-actions';
 
 function Header () {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
+  const user = useAppSelector((state) => state.USER.user);
   const dispatch = useAppDispatch();
   const onClickLogOut = () => dispatch(logoutAction());
   return (

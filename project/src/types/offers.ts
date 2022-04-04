@@ -37,3 +37,7 @@ export type Offer = {
 
 export type Offers = Offer[];
 
+export type Favorite = {
+  idHotels: number | null;
+  status: number;
+}

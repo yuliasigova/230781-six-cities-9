@@ -3,11 +3,13 @@ import {useRef, useEffect} from 'react';
 import useMap from '../../hooks/useMap';
 import {Icon, Marker} from 'leaflet';
 import {City, Offers} from '../../types/offers';
+import {useAppSelector } from '../../hooks/index';
 
 type MapProps = {
   city: City;
   offers: Offers;
-  selectedOffer: number | null;
+  idOffer?: number | null;
+  className: string;
 };
 
 const defaultIcon = new Icon({
@@ -22,10 +24,11 @@ const currentIcon = new Icon({
   iconAnchor: [14, 39],
 });
 
-function Map ({city, offers, selectedOffer}: MapProps): JSX.Element {
+function Map ({city, offers, idOffer, className}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
-
+  const selectedOffer = useAppSelector((state) => state.HOTELS.selectedOffer);
+  const offerMap = idOffer? idOffer: selectedOffer;
   useEffect(() => {
     if (map) {
       offers.forEach((offer) => {
@@ -34,14 +37,14 @@ function Map ({city, offers, selectedOffer}: MapProps): JSX.Element {
           lng: offer.location.longitude,
         });
 
-        marker.setIcon(selectedOffer !== null && offer.id === selectedOffer ? currentIcon : defaultIcon)
+        marker.setIcon(offerMap !== null && offer.id === offerMap ? currentIcon : defaultIcon)
           .addTo(map);
       });
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, offerMap]);
 
   return (
-    <section className='cities__map map'
+    <section className={className}
       ref={mapRef}
     >
     </section>

@@ -1,6 +1,6 @@
 import { Host } from './offers';
 
-export type Rewiew = {
+export type Review = {
   id: number;
   user: Host;
   rating: number;
@@ -8,4 +8,11 @@ export type Rewiew = {
   date: Date;
 }
 
+export type Reviews = Review[];
+
+export type NewReview = {
+  idHotels: number;
+  rating: number;
+  comment: string;
+}
 

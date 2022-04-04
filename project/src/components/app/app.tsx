@@ -11,8 +11,8 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {isCheckedAuth} from '../../util';
 
 function App(): JSX.Element {
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isDataLoaded = useAppSelector((state) => state.HOTELS.isDataLoaded);
+  const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
