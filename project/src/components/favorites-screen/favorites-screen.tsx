@@ -1,12 +1,25 @@
 import Header from '../header/header';
 import FavoriteCard from '../favorite-card/favorite-card';
-import {useAppSelector } from '../../hooks/index';
+import {useAppSelector, useAppDispatch } from '../../hooks/index';
 import FavoritesEmptyScreen from '../favorites-empty-screen/favorites-empty-screen';
+import {useEffect} from 'react';
+import {fetchFavoriteHotelAction} from '../../store/api-actions';
 
 function FavoritesScreen ():JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
-  const favoritesList = favoriteOffers.map((offer) => <FavoriteCard key = {offer.id} offer = {offer}/>);
+  const favoriteOffers = useAppSelector((state) => state.HOTELS.favoriteOffers);
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.HOTELS.offers);
+  //const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  useEffect(() => {
+    dispatch(fetchFavoriteHotelAction());
+  }, [offers, dispatch]);
+
+  //const favoritesList = favoriteOffers.map((offer) => <FavoriteCard key = {offer.id} offer = {offer}/>);
+  const cityOffer = favoriteOffers.map((offer) => offer.city.name);
+  const uniqCity = new Set(cityOffer);
+
+  // eslint-disable-next-line no-console
+  console.log(favoriteOffers, cityOffer, uniqCity);
   return (
     <div className={`page ${favoriteOffers.length === 0 ? 'page--favorites-empty' : ''}`}>
       <Header />
@@ -16,29 +29,21 @@ function FavoritesScreen ():JSX.Element {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                <li className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="/">
-                        <span>Amsterdam</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    {favoritesList}
-                  </div>
-                </li>
-                <li className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="/">
-                        <span>Cologne</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                  </div>
-                </li>
+                {[...uniqCity].map((city) =>
+                  (
+                    <li className="favorites__locations-items" key = {city}>
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <a className="locations__item-link" href="/">
+                            <span>{city}</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div className="favorites__places">
+                        {favoriteOffers.filter((offer) => offer.city.name === city).map((offer) =>
+                          <FavoriteCard key = {offer.id} offer = {offer}/>)}
+                      </div>
+                    </li>))}
               </ul>
             </section>
           </div>
