@@ -9,6 +9,7 @@ type InitialState = {
   selectedOffer: number | null;
   sortType: SortType;
   favoriteOffers: Offers;
+  isFavoriteLoaded: boolean;
 }
 
 const initialState: InitialState = {
@@ -18,6 +19,7 @@ const initialState: InitialState = {
   selectedOffer: null,
   sortType: SortType.Popular,
   favoriteOffers: [],
+  isFavoriteLoaded: false,
 };
 
 export const hotelSlice = createSlice({
@@ -40,6 +42,7 @@ export const hotelSlice = createSlice({
     },
     loadFavoriteOffers: (state, action) => {
       state.favoriteOffers = action.payload;
+      state.isFavoriteLoaded = true;
     },
     changeFavorite: (state, action) => {
       const id = state.offers.findIndex((offer) => offer.id === action.payload.id);

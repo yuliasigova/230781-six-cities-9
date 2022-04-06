@@ -12,7 +12,11 @@ function PropertyScreen ():JSX.Element {
   const id = Number(offerId.id);
   const offer = useAppSelector((state) => state.OFFER.offer);
   const offers = useAppSelector((state) => state.HOTELS.offers);
+  const city = offers[0].city;
+  const reviews = useAppSelector((state) => state.OFFER.rewiews);
+  const nearbyHotels = useAppSelector((state) => state.OFFER.nearbyHotels);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(fetchHotelAction(id));
     dispatch(fetchNearbyHotelAction(id));
@@ -22,8 +26,6 @@ function PropertyScreen ():JSX.Element {
     dispatch(fetchRewiewsAction(id));
   }, [id, dispatch]);
 
-  const reviews = useAppSelector((state) => state.OFFER.rewiews);
-  const nearbyHotels = useAppSelector((state) => state.OFFER.nearbyHotels);
   const currentHotels = [...nearbyHotels, offer];
   return (
     <div className="page">
@@ -31,7 +33,7 @@ function PropertyScreen ():JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
           {<PropertyCard  offer={offer} reviews= {reviews} offerId= {id}/>}
-          {nearbyHotels.length > 0 ? <Map city={currentHotels[0].city} offers={currentHotels} idOffer= {id}  className={'property__map map'}/>: null}
+          {nearbyHotels.length > 0 ? <Map city={city} offers={currentHotels} idOffer= {id}  className={'property__map map'}/>: null}
         </section>
         <div className="container">
           <section className="near-places places">

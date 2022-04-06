@@ -4,22 +4,22 @@ import {useAppSelector, useAppDispatch } from '../../hooks/index';
 import FavoritesEmptyScreen from '../favorites-empty-screen/favorites-empty-screen';
 import {useEffect} from 'react';
 import {fetchFavoriteHotelAction} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function FavoritesScreen ():JSX.Element {
   const favoriteOffers = useAppSelector((state) => state.HOTELS.favoriteOffers);
+  const isFavoriteLoaded = useAppSelector((state) => state.HOTELS.isFavoriteLoaded);
   const dispatch = useAppDispatch();
   const offers = useAppSelector((state) => state.HOTELS.offers);
-  //const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  const cityOffer = new Set(favoriteOffers.map((offer) => offer.city.name));
   useEffect(() => {
     dispatch(fetchFavoriteHotelAction());
   }, [offers, dispatch]);
 
-  //const favoritesList = favoriteOffers.map((offer) => <FavoriteCard key = {offer.id} offer = {offer}/>);
-  const cityOffer = favoriteOffers.map((offer) => offer.city.name);
-  const uniqCity = new Set(cityOffer);
+  if (!isFavoriteLoaded) {
+    return <LoadingScreen/>;
+  }
 
-  // eslint-disable-next-line no-console
-  console.log(favoriteOffers, cityOffer, uniqCity);
   return (
     <div className={`page ${favoriteOffers.length === 0 ? 'page--favorites-empty' : ''}`}>
       <Header />
@@ -29,7 +29,7 @@ function FavoritesScreen ():JSX.Element {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                {[...uniqCity].map((city) =>
+                {[...cityOffer].map((city) =>
                   (
                     <li className="favorites__locations-items" key = {city}>
                       <div className="favorites__locations locations locations--current">

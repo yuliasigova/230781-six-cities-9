@@ -17,7 +17,7 @@ type PropertyCardProps = {
 }
 
 function PropertyCard ({offer, reviews, offerId}:PropertyCardProps):JSX.Element {
-  const {goods, title, price, type, bedrooms, maxAdults, rating, images, isPremium, description, host, isFavorite} = offer;
+  const {goods, title, price, type, bedrooms, maxAdults, rating, images, isPremium, description, host} = offer;
   const comments = reviews.slice().sort((a, b) => (new Date(a.date).getTime() < new Date(b.date).getTime() ? 1 : -1)).slice(0, MAX_COMMENTS);
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   return (
@@ -41,13 +41,7 @@ function PropertyCard ({offer, reviews, offerId}:PropertyCardProps):JSX.Element 
             <h1 className="property__name">
               {title}
             </h1>
-            < FavoriteButton isFavorite={isFavorite} className={'property'} width={31} height={33} id={offerId}/>
-            {/* <button className="property__bookmark-button button" type="button">
-              <svg className="property__bookmark-icon" width={31} height={33}>
-                <use xlinkHref="#icon-bookmark" />
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button> */}
+            < FavoriteButton className={'property'} width={31} height={33} offer={offer}/>
           </div>
           <div className="property__rating rating">
             <div className="property__stars rating__stars">

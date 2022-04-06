@@ -2,19 +2,17 @@ import {useNavigate} from 'react-router-dom';
 import {useAppSelector, useAppDispatch } from '../../hooks/index';
 import {AuthorizationStatus, AppRoute} from '../../const';
 import {postFavoriteHotelAction} from '../../store/api-actions';
-//import {useCallback } from 'react';
+import { Offer } from '../../types/offers';
 
 type FavoriteButtonProps = {
-  isFavorite:boolean;
   className: string;
   width: number;
   height: number;
-  id: number | null;
+  offer: Offer;
 }
 
-function FavoriteButton ({isFavorite, className, width, height, id}: FavoriteButtonProps) {
+function FavoriteButton ({className, width, height, offer}: FavoriteButtonProps) {
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
-  //const selectedOffer = useAppSelector((state) => state.HOTELS.selectedOffer);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -22,11 +20,11 @@ function FavoriteButton ({isFavorite, className, width, height, id}: FavoriteBut
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       return navigate(AppRoute.Login);
     }
-    return dispatch(postFavoriteHotelAction({idHotels:id, status:isFavorite ? 0 : 1}));
+    return dispatch(postFavoriteHotelAction({idHotels:offer.id, status:offer.isFavorite ? 0 : 1}));
   };
 
   return (
-    <button className={`${className}__bookmark-button button ${isFavorite &&`${className}__bookmark-button--active`}`}
+    <button className={`${className}__bookmark-button button ${offer.isFavorite &&`${className}__bookmark-button--active`}`}
       type="button" onClick = {handleButtonClick}
     >
       <svg className={`${className}__bookmark-icon`} width={width} height={height}>
