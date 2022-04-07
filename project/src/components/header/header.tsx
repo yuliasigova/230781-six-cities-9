@@ -3,11 +3,11 @@ import {AuthorizationStatus, AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 import {logoutAction} from '../../store/api-actions';
 
-function Header () {
+function Header ():JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const user = useAppSelector((state) => state.USER.user);
   const dispatch = useAppDispatch();
-  const onClickLogOut = () => dispatch(logoutAction());
+  const handleLinkClick = () => dispatch(logoutAction());
   return (
     <header className="header">
       <div className="container">
@@ -28,7 +28,7 @@ function Header () {
                   </Link>
                 </li>
                 <li className="header__nav-item">
-                  <Link onClick = {onClickLogOut} className="header__nav-link" to="/">
+                  <Link onClick = {handleLinkClick} className="header__nav-link" to="/">
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>

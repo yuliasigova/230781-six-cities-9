@@ -8,7 +8,7 @@ type  FavoriteCardProps = {
 }
 
 function FavoriteCard ({offer}:FavoriteCardProps ):JSX.Element {
-  const {previewImage, isPremium, price, type, title, rating, id, isFavorite} = offer;
+  const {previewImage, isPremium, price, type, title, rating, id} = offer;
   return (
     <article className="favorites__card place-card">
       {isPremium &&
@@ -26,7 +26,7 @@ function FavoriteCard ({offer}:FavoriteCardProps ):JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <FavoriteButton isFavorite={isFavorite} className={'place-card'} width={18} height={19} id= {id}/>
+          <FavoriteButton className={'place-card'} width={18} height={19} offer= {offer}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
