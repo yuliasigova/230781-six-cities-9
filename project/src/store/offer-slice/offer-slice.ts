@@ -1,10 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Offer, Offers} from '../../types/offers';
+import {Offers, Offer} from '../../types/offers';
 import {Reviews} from '../../types/reviews';
 import {NameSpace} from '../../const';
 
 type InitialState = {
-  offer: Offer;
+  offer: Offer ;
   rewiews: Reviews;
   nearbyHotels: Offers;
 }
@@ -16,7 +16,7 @@ const initialState: InitialState = {
 };
 
 export const offerSlice = createSlice({
-  name: NameSpace.offer,
+  name: NameSpace.Offer,
   initialState,
   reducers: {
     loadOffer: (state, action) => {

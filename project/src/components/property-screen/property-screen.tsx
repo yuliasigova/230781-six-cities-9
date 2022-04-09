@@ -6,13 +6,13 @@ import {useEffect} from 'react';
 import OfferList from '../offers-list/offers-list';
 import Map from '../map/map';
 import PropertyCard from '../property-card/property-card';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 function PropertyScreen ():JSX.Element {
   const offerId = useParams();
   const id = Number(offerId.id);
   const offer = useAppSelector((state) => state.OFFER.offer);
   const offers = useAppSelector((state) => state.HOTELS.offers);
-  const city = offers[0].city;
   const reviews = useAppSelector((state) => state.OFFER.rewiews);
   const nearbyHotels = useAppSelector((state) => state.OFFER.nearbyHotels);
   const dispatch = useAppDispatch();
@@ -26,6 +26,10 @@ function PropertyScreen ():JSX.Element {
     dispatch(fetchRewiewsAction(id));
   }, [id, dispatch]);
 
+  if (offers.findIndex((elem) => elem.id === id) === -1) {
+    return <NotFoundScreen />;
+  }
+
   const currentHotels = [...nearbyHotels, offer];
   return (
     <div className="page">
@@ -33,7 +37,7 @@ function PropertyScreen ():JSX.Element {
       <main className="page__main page__main--property">
         <section className="property">
           {<PropertyCard  offer={offer} reviews= {reviews} offerId= {id}/>}
-          {nearbyHotels.length > 0 ? <Map city={city} offers={currentHotels} idOffer= {id}  className={'property__map map'}/>: null}
+          {offer.city && <Map city={currentHotels[0].city} offers={currentHotels} idOffer= {id}  className={'property__map map'}></Map>}
         </section>
         <div className="container">
           <section className="near-places places">

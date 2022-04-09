@@ -4,6 +4,7 @@ import {getRating} from '../../util';
 import {useAppDispatch } from '../../hooks/index';
 import {changeOffer} from '../../store/hotels-slice/hotels-slice';
 import FavoriteButton from '../favorite-button/favorite-button';
+import {AppRoute} from '../../const';
 
 
 type  CardOfferProps =  {
@@ -26,9 +27,9 @@ function CardOffer ({offer}:CardOfferProps ):JSX.Element {
         <span>Premium</span>
       </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="/">
+        <Link to={AppRoute.Main}>
           <img className="place-card__image" src={previewImage} width="{260}" height="{200}" alt="offer place" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
