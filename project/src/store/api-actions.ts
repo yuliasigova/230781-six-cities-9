@@ -40,7 +40,7 @@ export const fetchNearbyHotelAction = createAsyncThunk(
   'data/fetchNearbyHotel',
   async (idHotels:number) => {
     try {
-      const {data} = await api.get<Offer>(`${APIRoute.Hotels}/${idHotels}/nearby`);
+      const {data} = await api.get<Offers>(`${APIRoute.Hotels}/${idHotels}/nearby`);
       store.dispatch(loadNearbyHotels(data));
     } catch (error) {
       errorHandle(error);
@@ -71,6 +71,7 @@ export const postFavoriteHotelAction = createAsyncThunk(
     }
   },
 );
+
 export const fetchRewiewsAction = createAsyncThunk(
   'data/fetchReviews',
   async (idHotels:number) => {
