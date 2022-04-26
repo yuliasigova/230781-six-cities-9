@@ -8,6 +8,7 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
 export const getRating = (rating: number):number => rating * 20;
 
 export const sortOffers = (offers: Offers, sortType:string) => {
+  //const filterOffers = offers.filter((offer) => offer.city.name === city);
   switch(sortType) {
     case SortType.PriceLow:
       return offers.sort((a, b) => (a.price > b.price ? 1 : -1));

@@ -23,7 +23,7 @@ const initialState: InitialState = {
 };
 
 export const hotelSlice = createSlice({
-  name: NameSpace.Hotels,
+  name: NameSpace.hotels,
   initialState,
   reducers: {
     changeCity: (state, action) => {

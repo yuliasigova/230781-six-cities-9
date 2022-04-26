@@ -13,7 +13,7 @@ const initialState: InitialState = {
 };
 
 export const userSlice = createSlice({
-  name: NameSpace.User,
+  name: NameSpace.user,
   initialState,
   reducers: {
     requireAuthorization: (state, action) => {

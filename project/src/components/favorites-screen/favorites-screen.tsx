@@ -5,8 +5,6 @@ import FavoritesEmptyScreen from '../favorites-empty-screen/favorites-empty-scre
 import {useEffect} from 'react';
 import {fetchFavoriteHotelAction} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {AppRoute} from '../../const';
-import {Link} from 'react-router-dom';
 
 function FavoritesScreen ():JSX.Element {
   const favoriteOffers = useAppSelector((state) => state.HOTELS.favoriteOffers);
@@ -51,9 +49,9 @@ function FavoritesScreen ():JSX.Element {
           </div>
         </main>}
       <footer className="footer">
-        <Link to={AppRoute.Main} className="footer__logo-link">
+        <a className="footer__logo-link" href="main.html">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width={64} height={33} />
-        </Link>
+        </a>
       </footer>
     </div>
   );

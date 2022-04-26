@@ -5,7 +5,7 @@ import { userSlice } from './user-slice/user-slice';
 import {hotelSlice} from './hotels-slice/hotels-slice';
 
 export const rootReducer = combineReducers({
-  [NameSpace.Offer]: offerSlice.reducer,
-  [NameSpace.User]: userSlice.reducer,
-  [NameSpace.Hotels]: hotelSlice.reducer,
+  [NameSpace.offer]: offerSlice.reducer,
+  [NameSpace.user]: userSlice.reducer,
+  [NameSpace.hotels]: hotelSlice.reducer,
 });

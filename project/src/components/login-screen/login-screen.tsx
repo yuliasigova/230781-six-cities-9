@@ -1,4 +1,4 @@
-import {Navigate, Link} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import {useAppSelector } from '../../hooks/index';
 import {AuthorizationStatus, AppRoute} from '../../const';
 import AuthForm from '../auth-form/auth-form';
@@ -16,9 +16,9 @@ function LoginScreen ():JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to={AppRoute.Main} className="header__logo-link">
+              <a className="header__logo-link" href="/">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -31,9 +31,9 @@ function LoginScreen ():JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link to={AppRoute.Main} className="locations__item-link">
+              <a className="locations__item-link" href="/">
                 <span>{city}</span>
-              </Link>
+              </a>
             </div>
           </section>
         </div>
