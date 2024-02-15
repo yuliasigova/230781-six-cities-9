@@ -11,7 +11,7 @@ type FavoriteButtonProps = {
   offer: Offer;
 }
 
-function FavoriteButton ({className, width, height, offer}: FavoriteButtonProps) {
+function FavoriteButton({className, width, height, offer}: FavoriteButtonProps) {
   const authorizationStatus = useAppSelector((state) => state.USER.authorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
